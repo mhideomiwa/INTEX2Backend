@@ -1,57 +1,43 @@
 ﻿using Intex2Backend.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 
-namespace Intex2Backend.Data;
-
-public class EFBackendRepository : IBackendRepository
+namespace Intex2Backend.Data
 {
-    private readonly CPOLContext _context;
-
-    public EFBackendRepository(CPOLContext temp)
+    public class EFBackendRepository : IBackendRepository
     {
-        _context = temp;
-    }
-
-    public IEnumerable<Customer> Customers => _context.Customers;
-    public IEnumerable<LineItem> LineItem => _context.LineItems;
-    public IEnumerable<Order> Orders => _context.Orders;
-    public IEnumerable<Product> Products => _context.Products;
-
-    public IEnumerable<LineItem> LineItems
-    {
-        get => throw new NotImplementedException();
-        set => throw new NotImplementedException();
-    }
-
-    IEnumerable<Customer> IBackendRepository.Customers
-    {
-        get => throw new NotImplementedException();
-        set => throw new NotImplementedException();
-    }
-
-    IEnumerable<Order> IBackendRepository.Orders
-    {
-        get => throw new NotImplementedException();
-        set => throw new NotImplementedException();
-    }
-
-    IEnumerable<Product> IBackendRepository.Products
-    {
-
-        get => throw new NotImplementedException();
-        set => throw new NotImplementedException();
-
         private CPOLContext _context;
+
         public EFBackendRepository(CPOLContext temp)
         {
             _context = temp;
         }
 
-        public IEnumerable<Customer> Customers => _context.Customers;
-        public IEnumerable<LineItem> LineItem => _context.LineItems;
-        public IEnumerable<Order> Orders => _context.Orders;
-        public IEnumerable<Product> Products => _context.Products;
+        public IEnumerable<Customer> Customers 
+        { 
+            get => _context.Customers;
+            set => throw new NotImplementedException(); // Implement setter if needed
+        }
 
+        public IEnumerable<LineItem> LineItems
+        {
+            get=> _context.LineItems;
+            set => throw new NotImplementedException(); // Implement setter if needed
+        }
+
+        public IEnumerable<Order> Orders 
+        {
+            get => _context.Orders;
+            set => throw new NotImplementedException(); // Implement setter if needed
+        }
+
+        public IEnumerable<Product> Products 
+        {
+            get => _context.Products;
+            set => throw new NotImplementedException(); // Implement setter if needed
+        }
+        
         public void UpdateProduct(Product product)
         {
             _context.Entry(product).State = EntityState.Modified;
@@ -123,13 +109,5 @@ public class EFBackendRepository : IBackendRepository
             _context.Customers.Add(customer);
             _context.SaveChanges();
         }
-
-
-        //This was stuff generated from importing the sqlite database
-        public IEnumerable<LineItem> LineItems { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        IEnumerable<Customer> IBackendRepository.Customers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        IEnumerable<Order> IBackendRepository.Orders { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        IEnumerable<Product> IBackendRepository.Products { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
     }
 }
