@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace Intex2Backend.Models;
 
-namespace Intex2Backend.Models;
-
-public partial class Customer
+public class Customer
 {
     public int CustomerId { get; set; }
 

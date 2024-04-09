@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace Intex2Backend.Models;
 
-namespace Intex2Backend.Models;
-
-public partial class Order
+public class Order
 {
     public int TransactionId { get; set; }
 
