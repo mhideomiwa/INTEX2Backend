@@ -1,5 +1,7 @@
-using Intex2Backend.Data; //TODO: Add models to Data folder
+using Intex2Backend.Data;
+using Intex2Backend.UserData;
 using Microsoft.EntityFrameworkCore;
+//TODO: Add models to Data folder
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,10 +14,16 @@ builder.Services.AddCors();
 
 builder.Services.AddDbContext<CPOLContext>(options =>
 {
-    options.UseSqlite(builder.Configuration["ConnectionStrings:sqliteCPOL.sqlite"]);
+    options.UseSqlite(builder.Configuration["ConnectionStrings:CPOLConnection"]);
+});
+
+builder.Services.AddDbContext<UsersContext>(options =>
+{
+    options.UseSqlite(builder.Configuration["ConnectionStrings:UserConnection"]);
 });
 
 builder.Services.AddScoped<IBackendRepository, EFBackendRepository>();
+builder.Services.AddScoped<IUserRepository, EfUserRepository>();
 
 var app = builder.Build();
 
@@ -36,7 +44,7 @@ app.MapControllers();
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
