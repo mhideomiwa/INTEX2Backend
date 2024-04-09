@@ -14,30 +14,30 @@ namespace Intex2Backend.Data
             _context = temp;
         }
 
-        public IEnumerable<Customer> Customers 
-        { 
+        public IEnumerable<Customer> Customers
+        {
             get => _context.Customers;
             set => throw new NotImplementedException(); // Implement setter if needed
         }
 
         public IEnumerable<LineItem> LineItems
         {
-            get=> _context.LineItems;
+            get => _context.LineItems;
             set => throw new NotImplementedException(); // Implement setter if needed
         }
 
-        public IEnumerable<Order> Orders 
+        public IEnumerable<Order> Orders
         {
             get => _context.Orders;
             set => throw new NotImplementedException(); // Implement setter if needed
         }
 
-        public IEnumerable<Product> Products 
+        public IEnumerable<Product> Products
         {
             get => _context.Products;
             set => throw new NotImplementedException(); // Implement setter if needed
         }
-        
+
         public void UpdateProduct(Product product)
         {
             _context.Entry(product).State = EntityState.Modified;
