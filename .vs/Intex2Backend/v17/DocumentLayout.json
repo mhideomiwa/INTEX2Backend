@@ -7,12 +7,16 @@
       "RelativeMoniker": "D:0:0:{60D0403B-F7D5-481F-B89C-CE4D541D04EB}|Intex2Backend.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{60D0403B-F7D5-481F-B89C-CE4D541D04EB}|Intex2Backend.csproj|c:\\users\\st2sc\\source\\repos\\intex2legoshop\\backend\\data\\ibackendrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60D0403B-F7D5-481F-B89C-CE4D541D04EB}|Intex2Backend.csproj|solutionrelative:data\\ibackendrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{60D0403B-F7D5-481F-B89C-CE4D541D04EB}|Intex2Backend.csproj|c:\\users\\st2sc\\source\\repos\\intex2legoshop\\backend\\data\\efbackendrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{60D0403B-F7D5-481F-B89C-CE4D541D04EB}|Intex2Backend.csproj|solutionrelative:data\\efbackendrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{60D0403B-F7D5-481F-B89C-CE4D541D04EB}|Intex2Backend.csproj|c:\\users\\st2sc\\source\\repos\\intex2legoshop\\backend\\data\\ibackendrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60D0403B-F7D5-481F-B89C-CE4D541D04EB}|Intex2Backend.csproj|solutionrelative:data\\ibackendrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{60D0403B-F7D5-481F-B89C-CE4D541D04EB}|Intex2Backend.csproj|c:\\users\\st2sc\\source\\repos\\intex2legoshop\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60D0403B-F7D5-481F-B89C-CE4D541D04EB}|Intex2Backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,32 +26,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IBackendRepository.cs",
-              "DocumentMoniker": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Data\\IBackendRepository.cs",
-              "RelativeDocumentMoniker": "Data\\IBackendRepository.cs",
-              "ToolTip": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Data\\IBackendRepository.cs",
-              "RelativeToolTip": "Data\\IBackendRepository.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAQwAsAAAAvAAAA",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-09T20:13:06.609Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "EFBackendRepository.cs",
-              "DocumentMoniker": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Data\\EFBackendRepository.cs",
-              "RelativeDocumentMoniker": "Data\\EFBackendRepository.cs",
-              "ToolTip": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Data\\EFBackendRepository.cs",
-              "RelativeToolTip": "Data\\EFBackendRepository.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAADwvyIAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-09T20:13:03.882Z",
+              "WhenOpened": "2024-04-09T23:06:10.73Z",
               "EditorCaption": ""
             },
             {
@@ -58,9 +49,35 @@
               "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
               "ToolTip": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Controllers\\HomeController.cs",
               "RelativeToolTip": "Controllers\\HomeController.cs",
-              "ViewState": "AQIAAK0AAAAAAAAAAAAmwCUBAAAqAAAA",
+              "ViewState": "AQIAAP8AAAAAAAAAAAAewA8BAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-09T17:46:51.243Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IBackendRepository.cs",
+              "DocumentMoniker": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Data\\IBackendRepository.cs",
+              "RelativeDocumentMoniker": "Data\\IBackendRepository.cs",
+              "ToolTip": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Data\\IBackendRepository.cs",
+              "RelativeToolTip": "Data\\IBackendRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-09T22:15:30.392Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EFBackendRepository.cs",
+              "DocumentMoniker": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Data\\EFBackendRepository.cs",
+              "RelativeDocumentMoniker": "Data\\EFBackendRepository.cs",
+              "ToolTip": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Data\\EFBackendRepository.cs",
+              "RelativeToolTip": "Data\\EFBackendRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFsAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-09T21:58:32.813Z",
               "EditorCaption": ""
             }
           ]

@@ -19,6 +19,6 @@ namespace Intex2Backend.Data
         void UpdateCustomer(Customer customer) { }
         void DeleteCustomer(Customer customer) { }
         void AddCustomer(Customer customer) { }
-        
+
     }
 }

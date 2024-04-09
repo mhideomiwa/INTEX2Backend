@@ -1,6 +1,9 @@
-﻿namespace Intex2Backend.Models;
+﻿using System;
+using System.Collections.Generic;
 
-public class Product
+namespace Intex2Backend.Models;
+
+public partial class Product
 {
     public int ProductId { get; set; }
 
