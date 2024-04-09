@@ -10,12 +10,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 
-builder.Services.AddDbContext<TODO: add context file here>(options =>
+builder.Services.AddDbContext<CPOLContext>(options =>
 {
-    options.UseSqlite(builder.Configuration["ConnectionStrings:BowlersDb"]);
+    options.UseSqlite(builder.Configuration["ConnectionStrings:sqliteCPOL.sqlite"]);
 });
 
-builder.Services.AddScoped<TODO add Irepository, TODO: add EFrepository>();
+builder.Services.AddScoped<IBackendRepository, EFBackendRepository>();
 
 var app = builder.Build();
 
