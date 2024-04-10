@@ -3,22 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{60D0403B-F7D5-481F-B89C-CE4D541D04EB}|Intex2Backend.csproj|c:\\users\\st2sc\\source\\repos\\intex2legoshop\\backend\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60D0403B-F7D5-481F-B89C-CE4D541D04EB}|Intex2Backend.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60D0403B-F7D5-481F-B89C-CE4D541D04EB}|Intex2Backend.csproj|c:\\users\\st2sc\\source\\repos\\intex2legoshop\\backend\\models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60D0403B-F7D5-481F-B89C-CE4D541D04EB}|Intex2Backend.csproj|solutionrelative:models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60D0403B-F7D5-481F-B89C-CE4D541D04EB}|Intex2Backend.csproj|c:\\users\\st2sc\\source\\repos\\intex2legoshop\\backend\\data\\ibackendrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60D0403B-F7D5-481F-B89C-CE4D541D04EB}|Intex2Backend.csproj|solutionrelative:data\\ibackendrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60D0403B-F7D5-481F-B89C-CE4D541D04EB}|Intex2Backend.csproj|c:\\users\\st2sc\\source\\repos\\intex2legoshop\\backend\\data\\efbackendrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60D0403B-F7D5-481F-B89C-CE4D541D04EB}|Intex2Backend.csproj|solutionrelative:data\\efbackendrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{60D0403B-F7D5-481F-B89C-CE4D541D04EB}|Intex2Backend.csproj|c:\\users\\st2sc\\source\\repos\\intex2legoshop\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{60D0403B-F7D5-481F-B89C-CE4D541D04EB}|Intex2Backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -30,92 +14,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAABAAAA",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAUwCsAAABwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-09T23:06:10.73Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "Controllers\\HomeController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-09T17:46:51.243Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IBackendRepository.cs",
-              "DocumentMoniker": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Data\\IBackendRepository.cs",
-              "RelativeDocumentMoniker": "Data\\IBackendRepository.cs",
-              "ToolTip": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Data\\IBackendRepository.cs",
-              "RelativeToolTip": "Data\\IBackendRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-09T22:15:30.392Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "EFBackendRepository.cs",
-              "DocumentMoniker": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Data\\EFBackendRepository.cs",
-              "RelativeDocumentMoniker": "Data\\EFBackendRepository.cs",
-              "ToolTip": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Data\\EFBackendRepository.cs",
-              "RelativeToolTip": "Data\\EFBackendRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFsAAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-09T21:58:32.813Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "cbbb64ac-3a42-4b85-b6dc-fa93b39cad7f",
-        "Display": 0,
-        "X": -5,
-        "Y": 118,
-        "Width": 1290,
-        "Height": 639,
-        "WindowState": 2
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Customer.cs",
-              "DocumentMoniker": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Models\\Customer.cs",
-              "RelativeDocumentMoniker": "Models\\Customer.cs",
-              "ToolTip": "C:\\Users\\st2sc\\source\\repos\\Intex2LegoShop\\Backend\\Models\\Customer.cs",
-              "RelativeToolTip": "Models\\Customer.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-10T00:51:15.421Z",
               "EditorCaption": ""
             }
           ]
