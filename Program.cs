@@ -4,6 +4,7 @@ using Intex2Backend.UserData;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json; 
 
 using Microsoft.IdentityModel.Tokens;
 
@@ -35,6 +36,10 @@ builder.Services.AddDbContext<UsersContext>(options =>
 
 builder.Services.AddScoped<IBackendRepository, EFBackendRepository>();
 
+builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+{
+    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
 
 var app = builder.Build();
 
@@ -44,6 +49,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
+app.UseCors("corsapp");
 
 app.MapIdentityApi<IdentityUser>();
 
