@@ -1,10 +1,20 @@
+using System.Text;
 using Intex2Backend.Data;
 using Intex2Backend.UserData;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+
+using Microsoft.IdentityModel.Tokens;
+
 using System.Resources;
-//TODO: Add models to Data folder
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthorization();
+builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+    .AddEntityFrameworkStores<UsersContext>();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -24,7 +34,7 @@ builder.Services.AddDbContext<UsersContext>(options =>
 });
 
 builder.Services.AddScoped<IBackendRepository, EFBackendRepository>();
-builder.Services.AddScoped<IUserRepository, EfUserRepository>();
+
 
 var app = builder.Build();
 
@@ -34,6 +44,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.MapIdentityApi<IdentityUser>();
 
 // Security Middleware
 app.Use(async (ctx, next) =>
@@ -61,6 +73,7 @@ app.UseCors(p => p.WithOrigins("http://localhost:3000"));
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
