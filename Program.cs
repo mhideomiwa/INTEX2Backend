@@ -11,18 +11,30 @@ using System.Resources;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using Intex2Backend.Models;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddAuthorization();
 
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+
+    });
+
+    options.OperationFilter<SecurityRequirementsOperationFilter>();
+});
 builder.Services.AddCors();
 
 builder.Services.AddScoped<IBackendRepository, EFBackendRepository>();
@@ -34,8 +46,16 @@ builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 
 builder.Services.AddDbContext<IntexDatabaseContext>(options => { 
     options.UseSqlServer(builder.Configuration["ConnectionStrings:AzureConnection"]); 
-}); 
+});
 
+builder.Services.AddDbContext<DataContext>(options => {
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:AzureConnection"]);
+});
+
+builder.Services.AddAuthorization();
+
+builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+    .AddEntityFrameworkStores<DataContext>();
 
 var app = builder.Build();
 
@@ -46,11 +66,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
-app.UseCors("corsapp");
-
-// Dear Matthew, not sure what this is for but when it is uncommented the app doesn't run.
-//app.MapIdentityApi<IdentityUser>();
+app.MapIdentityApi<IdentityUser>();
 
 // Security Middleware
 app.Use(async (ctx, next) =>
@@ -74,8 +90,8 @@ app.Use(async (ctx, next) =>
     await next();
 });
 
-app.UseCors(p => p.WithOrigins("http://localhost:3000"));
-
+//app.UseCors(p => p.WithOrigins("http://localhost:3000"));
+app.UseCors("corsapp");
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
