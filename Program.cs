@@ -1,6 +1,5 @@
 using System.Text;
 using Intex2Backend.Data;
-using Intex2Backend.UserData;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -9,13 +8,15 @@ using System.Text.Json;
 using Microsoft.IdentityModel.Tokens;
 
 using System.Resources;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+using Intex2Backend.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAuthorization();
-builder.Services.AddIdentityApiEndpoints<IdentityUser>()
-    .AddEntityFrameworkStores<UsersContext>();
+
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -24,22 +25,17 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 
-builder.Services.AddDbContext<CPOLContext>(options =>
-{
-    options.UseSqlite(builder.Configuration["ConnectionStrings:CPOLConnection"]);
-});
-
-builder.Services.AddDbContext<UsersContext>(options =>
-{
-    options.UseSqlite(builder.Configuration["ConnectionStrings:UserConnection"]);
-});
-
 builder.Services.AddScoped<IBackendRepository, EFBackendRepository>();
 
 builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 {
     builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
 }));
+
+builder.Services.AddDbContext<IntexDatabaseContext>(options => { 
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:AzureConnection"]); 
+}); 
+
 
 var app = builder.Build();
 
@@ -53,7 +49,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("corsapp");
 
-app.MapIdentityApi<IdentityUser>();
+// Dear Matthew, not sure what this is for but when it is uncommented the app doesn't run.
+//app.MapIdentityApi<IdentityUser>();
 
 // Security Middleware
 app.Use(async (ctx, next) =>

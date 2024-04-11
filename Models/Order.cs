@@ -7,17 +7,17 @@ public partial class Order
 {
     public int TransactionId { get; set; }
 
-    public int CustomerId { get; set; }
+    public short CustomerId { get; set; }
 
-    public string? Date { get; set; }
+    public DateOnly? Date { get; set; }
 
     public string? DayOfWeek { get; set; }
 
-    public int? Time { get; set; }
+    public byte? Time { get; set; }
 
     public string? EntryMode { get; set; }
 
-    public int? Amount { get; set; }
+    public short? Amount { get; set; }
 
     public string? TypeOfTransaction { get; set; }
 
