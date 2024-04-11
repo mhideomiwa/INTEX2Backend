@@ -1,5 +1,6 @@
 using Intex2Backend.Data;
 using Intex2Backend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Azure;
@@ -441,6 +442,7 @@ namespace Intex2Backend.Controllers
             return NoContent();
         }
         // Delete a product
+        [Authorize]
         [HttpDelete("DeleteProduct")]
         public IActionResult DeleteProduct(int id)
         {
