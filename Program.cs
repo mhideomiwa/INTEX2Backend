@@ -57,6 +57,14 @@ builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<DataContext>();
 
+
+builder.Services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
+{
+    microsoftOptions.ClientId = builder.Configuration["Authentication:Microsoft:ClientId"];
+    microsoftOptions.ClientSecret = builder.Configuration["Authentication:Microsoft:ClientSecret"];
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
