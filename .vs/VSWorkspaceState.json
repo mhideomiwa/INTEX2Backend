@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Controllers",
+    "\\Data",
+    "\\Models",
+    "\\Properties",
+    "\\UserData"
   ],
-  "SelectedNode": "\\Intex2Backend.sln",
   "PreviewInSolutionExplorer": false
 }

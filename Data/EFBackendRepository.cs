@@ -7,9 +7,9 @@ namespace Intex2Backend.Data
 {
     public class EFBackendRepository : IBackendRepository
     {
-        private CPOLContext _context;
+        private IntexDatabaseContext _context;
 
-        public EFBackendRepository(CPOLContext temp)
+        public EFBackendRepository(IntexDatabaseContext temp)
         {
             _context = temp;
         }

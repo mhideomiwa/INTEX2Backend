@@ -19,8 +19,8 @@ namespace Intex2Backend.Controllers
         //Customer section
         //
         //Returns all customer info
-         [HttpGet("GetAllCustomers")]
-         public IEnumerable<Customer> GetCustomers()
+        [HttpGet("GetAllCustomers")]
+        public IEnumerable<Customer> GetCustomers()
         {
             var customerData = _repo.Customers
                 .ToArray();
@@ -102,7 +102,13 @@ namespace Intex2Backend.Controllers
                 customers = customers.Where(p => p.LastName == lastName);
 
             if (!string.IsNullOrEmpty(birthDate))
-                customers = customers.Where(p => p.BirthDate == birthDate);
+            {
+                DateOnly parsedBirthDate;
+                if (DateOnly.TryParse(birthDate, out parsedBirthDate))
+                {
+                    customers = customers.Where(p => p.BirthDate == parsedBirthDate);
+                }
+            }
 
             if (!string.IsNullOrEmpty(countryOfResidence))
                 customers = customers.Where(p => EF.Functions.Like(p.CountryOfResidence, $"%{countryOfResidence}%"));
@@ -123,10 +129,10 @@ namespace Intex2Backend.Controllers
                 customers = customers.Where(p =>
                     EF.Functions.Like(p.FirstName, $"%{searchTerm}%") ||
                     EF.Functions.Like(p.LastName, $"%{searchTerm}%") ||
-                    EF.Functions.Like(p.BirthDate, $"%{searchTerm}%") ||
                     EF.Functions.Like(p.CountryOfResidence, $"%{searchTerm}%") ||
                     EF.Functions.Like(p.Gender, $"%{searchTerm}%") ||
-                    (p.Age != null && p.Age.ToString().Contains(searchTerm))
+                    (p.Age != null && p.Age.ToString().Contains(searchTerm)) ||
+                    EF.Functions.Like(p.BirthDate.Value.ToString("yyyy-MM-dd"), $"%{searchTerm}%") // Convert BirthDate to string using a specific format
                 );
             }
 
@@ -317,7 +323,17 @@ namespace Intex2Backend.Controllers
             var orders = _repo.Orders.AsQueryable();
 
             if (!string.IsNullOrEmpty(date))
-                orders = orders.Where(p => EF.Functions.Like(p.Date, $"%{date}%"));
+            {
+                DateOnly parsedDate;
+                if (DateOnly.TryParse(date, out parsedDate))
+                {
+                    orders = orders.Where(p => p.Date == parsedDate);
+                }
+                else
+                {
+                    // Handle invalid birthDate format
+                }
+            }
 
             if (!string.IsNullOrEmpty(dayOfWeek))
                 orders = orders.Where(p => EF.Functions.Like(p.DayOfWeek, $"%{dayOfWeek}%"));
@@ -359,8 +375,12 @@ namespace Intex2Backend.Controllers
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
+                // Convert the searchTerm to a DateOnly object if possible
+                DateOnly searchDate;
+                bool isValidSearchDate = DateOnly.TryParse(searchTerm, out searchDate);
+
+                // Filter orders based on searchTerm
                 orders = orders.Where(o =>
-                    EF.Functions.Like(o.Date, $"%{searchTerm}%") ||
                     EF.Functions.Like(o.DayOfWeek, $"%{searchTerm}%") ||
                     EF.Functions.Like(o.EntryMode, $"%{searchTerm}%") ||
                     EF.Functions.Like(o.TypeOfTransaction, $"%{searchTerm}%") ||
