@@ -5,10 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Azure;
 using Microsoft.ML.OnnxRuntime;
-using System;
 namespace Intex2Backend.Controllers
-// Please just work
-
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -569,60 +566,61 @@ namespace Intex2Backend.Controllers
             return Ok(recommendations);
         }
 
-            //
-    //Onnx File Implementation
-    //
-    [HttpPost("detect-fraud")]
-    public IActionResult DetectFraud([FromBody] FraudDetectionInput input)
-    {
-        // Load the ONNX model (you can do this once and keep it in memory)
-        var modelPath = Path.Combine(Directory.GetCurrentDirectory(), "Onnx", "extra_trees.onnx");
-        var session = new InferenceSession(modelPath);
+        //
+        //Onnx File Implementation
+        //
+        [HttpPost("detect-fraud")]
+        public IActionResult DetectFraud([FromBody] FraudDetectionInput input)
+        {
+            // Load the ONNX model (you can do this once and keep it in memory)
+            var modelPath = Path.Combine(Directory.GetCurrentDirectory(), "Onnx", "extra_trees.onnx");
+            var session = new InferenceSession(modelPath);
 
-        // Get the input name from the model's metadata
-        var inputName = session.InputMetadata.Keys.First();
+            // Get the input name from the model's metadata
+            var inputName = session.InputMetadata.Keys.First();
 
-        // Prepare the input data
-        var inputTensor = OnnxModelHelper.InputToTensor(input);
-        var inputData = new List<NamedOnnxValue>
+            // Prepare the input data
+            var inputTensor = OnnxModelHelper.InputToTensor(input);
+            var inputData = new List<NamedOnnxValue>
 {
     NamedOnnxValue.CreateFromTensor(inputName, inputTensor)
 };
 
-        // Run the inference
-        using (var outputData = session.Run(inputData))
-        {
-            if (outputData.Any())
+            // Run the inference
+            using (var outputData = session.Run(inputData))
             {
-                // Get the output name from the model's metadata
-                var outputName = session.OutputMetadata.Keys.First();
-
-                // Find the output with the matching name
-                var outputTensor = outputData.FirstOrDefault(x => x.Name == outputName);
-
-                if (outputTensor != null)
+                if (outputData.Any())
                 {
-                    // Extract the fraud detection result
-                    var fraudLabel = outputTensor.AsTensor<long>().ToArray()[0];
+                    // Get the output name from the model's metadata
+                    var outputName = session.OutputMetadata.Keys.First();
 
-                    // Determine if fraud is detected based on the label
-                    var fraudDetected = fraudLabel == 1;
+                    // Find the output with the matching name
+                    var outputTensor = outputData.FirstOrDefault(x => x.Name == outputName);
 
-                    // Return the result as the API response
-                    return Ok(new { FraudDetected = fraudDetected, FraudLabel = fraudLabel });
+                    if (outputTensor != null)
+                    {
+                        // Extract the fraud detection result
+                        var fraudLabel = outputTensor.AsTensor<long>().ToArray()[0];
+
+                        // Determine if fraud is detected based on the label
+                        var fraudDetected = fraudLabel == 1;
+
+                        // Return the result as the API response
+                        return Ok(new { FraudDetected = fraudDetected, FraudLabel = fraudLabel });
+                    }
+                    else
+                    {
+                        // Handle the case when the output with the expected name is not found
+                        return BadRequest("Output not found");
+                    }
                 }
                 else
                 {
-                    // Handle the case when the output with the expected name is not found
-                    return BadRequest("Output not found");
+                    // Handle the case when outputData is empty
+                    return BadRequest("Invalid model output");
                 }
             }
-            else
-            {
-                // Handle the case when outputData is empty
-                return BadRequest("Invalid model output");
-            }
         }
-    }
+
     }
 }
