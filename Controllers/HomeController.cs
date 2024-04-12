@@ -4,9 +4,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Azure;
-namespace Intex2Backend.Controllers
 using Microsoft.ML.OnnxRuntime;
 using System;
+namespace Intex2Backend.Controllers
+
 {
     [Route("api/[controller]")]
     [ApiController]

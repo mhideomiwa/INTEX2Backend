@@ -28,6 +28,7 @@
         </PackageReference>
         <PackageReference Include="Microsoft.Identity.Web" Version="2.15.2" />
         <PackageReference Include="Microsoft.Identity.Web.DownstreamApi" Version="2.15.2" />
+        <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.17.3" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
         <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.1" />
@@ -35,6 +36,7 @@
 
     <ItemGroup>
         <Folder Include="Models\" />
+        <Folder Include="Onnx\" />
     </ItemGroup>
 
 </Project>
