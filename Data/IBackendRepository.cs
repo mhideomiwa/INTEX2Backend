@@ -7,6 +7,9 @@ namespace Intex2Backend.Data
         IEnumerable<LineItem> LineItems { get; set; }
         IEnumerable<Order> Orders { get; set; }
         IEnumerable<Product> Products { get; set; }
+        IEnumerable<ContentFiltering> ContentFilterings { get; set; }
+        IEnumerable<ProductCollab> ProductCollabs { get; set; }
+        IEnumerable<UserCollab> UserCollabs { get; set; }
         void UpdateProduct(Product product) { }
         void DeleteProduct(Product product) { }
         void AddProduct(Product product) { }
