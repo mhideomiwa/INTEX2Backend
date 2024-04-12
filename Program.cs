@@ -13,6 +13,7 @@ using System.Globalization;
 using Intex2Backend.Models;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using System.Configuration;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,13 +45,19 @@ builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
     builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
 }));
 
-builder.Services.AddDbContext<IntexDatabaseContext>(options => { 
-    options.UseSqlServer(builder.Configuration["ConnectionStrings:AzureConnection"]); 
-});
+//builder.Services.AddDbContext<IntexDatabaseContext>(options => { 
+//    options.UseSqlServer(builder.Configuration["ConnectionStrings:AzureConnection"]); 
+//});
 
-builder.Services.AddDbContext<DataContext>(options => {
-    options.UseSqlServer(builder.Configuration["ConnectionStrings:AzureConnection"]);
-});
+//builder.Services.AddDbContext<DataContext>(options => {
+//    options.UseSqlServer(builder.Configuration["ConnectionStrings:AzureConnection"]);
+//});
+
+builder.Services.AddDbContext<IntexDatabaseContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AzureConnection")));
+
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AzureConnection")));
 
 builder.Services.AddAuthorization();
 
