@@ -591,6 +591,13 @@ namespace Intex2Backend.Controllers
             return Ok(recommendations);
         }
 
+        
+        [Authorize]
+        [HttpGet("auth-page")]
+        public IActionResult AuthPage()
+        {
+            return Ok("You are authorized to view this page");
+        }
         //
         //Onnx File Implementation
         //
