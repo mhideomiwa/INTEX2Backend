@@ -21,6 +21,7 @@ namespace Intex2Backend.Controllers
         //Customer section
         //
         //Returns all customer info
+        [Authorize]
         [HttpGet("GetAllCustomers")]
         public IEnumerable<Customer> GetCustomers()
         {
@@ -29,6 +30,7 @@ namespace Intex2Backend.Controllers
             return customerData;
         }
         //Returns one customers info
+        [Authorize]
         [HttpGet("GetOneCustomer")]
         public IEnumerable<Customer> GetCustomers(int id)
         {
@@ -37,6 +39,7 @@ namespace Intex2Backend.Controllers
             return customerData;
         }
         // Edit a Customer
+        [Authorize]
         [HttpPut("EditCustomer")]
         public IActionResult EditCustomer(int id, Customer customer)
         {
@@ -60,6 +63,7 @@ namespace Intex2Backend.Controllers
             return NoContent();
         }
         // Delete a Customer
+        [Authorize]
         [HttpDelete("DeleteCustomer")]
         public IActionResult DeleteCustomer(int id)
         {
@@ -72,6 +76,7 @@ namespace Intex2Backend.Controllers
             return NoContent();
         }
         // Create Customer
+        [Authorize]
         [HttpPost("CreateCustomer")]
         public IActionResult CreateCustomer(Customer customer)
         {
@@ -83,6 +88,7 @@ namespace Intex2Backend.Controllers
             return BadRequest(ModelState);
         }
         // Filter Customers
+        [Authorize]
         [HttpGet("FilterCustomers")]
         public IEnumerable<Customer> FilterCustomers(
                 string? firstName = null,
@@ -121,6 +127,7 @@ namespace Intex2Backend.Controllers
             return customers.ToArray();
         }
         // Search Customers
+        [Authorize]
         [HttpGet("SearchCustomers")]
         public IEnumerable<Customer> FilterCustomers(string searchTerm)
         {
@@ -145,6 +152,7 @@ namespace Intex2Backend.Controllers
         //Line Item section \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
         //
         //Returns all line item info
+        [Authorize]
         [HttpGet("GetAllLineItems")]
         public IEnumerable<LineItem> GetLineItems()
         {
@@ -153,6 +161,7 @@ namespace Intex2Backend.Controllers
             return lineItemData;
         }
         //Returns one line item
+        [Authorize]
         [HttpGet("GetOneLineItem")]
         public IEnumerable<LineItem> GetLineItems(int transactionId, int productId)
         {
@@ -163,6 +172,7 @@ namespace Intex2Backend.Controllers
             return lineItemData;
         }
         // Edit a line item
+        [Authorize]
         [HttpPut("EditLineItem")]
         public IActionResult EditLineItem(int id, LineItem lineItem)
         {
@@ -182,6 +192,7 @@ namespace Intex2Backend.Controllers
             return NoContent();
         }
         // Delete a Line Item
+        [Authorize]
         [HttpDelete("DeleteLineItem")]
         public IActionResult DeleteLineItem(int id)
         {
@@ -194,6 +205,7 @@ namespace Intex2Backend.Controllers
             return NoContent();
         }
         // Create line item
+        [Authorize]
         [HttpPost("CreateLineItem")]
         public IActionResult CreateLineItem(LineItem lineItem)
         {
@@ -205,6 +217,7 @@ namespace Intex2Backend.Controllers
             return BadRequest(ModelState);
         }
         // Filter line items
+        [Authorize]
         [HttpGet("FilterLineItems")]
         public IEnumerable<LineItem> FilterLineItems(
                 int? qty = null,
@@ -221,6 +234,7 @@ namespace Intex2Backend.Controllers
             return lineItems.ToArray();
         }
         // Search line items
+        [Authorize]
         [HttpGet("SearchLineItems")]
         public IEnumerable<LineItem> FilterLineItems(string searchTerm)
         {
@@ -241,6 +255,7 @@ namespace Intex2Backend.Controllers
         //Order section /////////////////////////////////////////
         //
         //Returns all Orders
+        [Authorize]
         [HttpGet("GetAllOrders")]
         public IEnumerable<Order> GetOrders()
         {
@@ -249,6 +264,7 @@ namespace Intex2Backend.Controllers
             return orderData;
         }
         //Returns one order
+        [Authorize]
         [HttpGet("GetOneOrder")]
         public IEnumerable<Order> GetOrders(int id)
         {
@@ -257,6 +273,7 @@ namespace Intex2Backend.Controllers
             return orderData;
         }
         // Edit a order
+        [Authorize]
         [HttpPut("EditOrder")]
         public IActionResult EditOrder(int id, Order order)
         {
@@ -285,6 +302,7 @@ namespace Intex2Backend.Controllers
             return NoContent();
         }
         // Delete a Order
+        [Authorize]
         [HttpDelete("DeleteOrder")]
         public IActionResult DeleteOrder(int id)
         {
@@ -297,6 +315,7 @@ namespace Intex2Backend.Controllers
             return NoContent();
         }
         // Create Order
+        [Authorize]
         [HttpPost("CreateOrder")]
         public IActionResult CreateOrder(Order order)
         {
@@ -308,6 +327,7 @@ namespace Intex2Backend.Controllers
             return BadRequest(ModelState);
         }
         // Filter Orders
+        [Authorize]
         [HttpGet("FilterOrders")]
         public IEnumerable<Order> FilterOrders(
                 string? date = null,
@@ -370,6 +390,7 @@ namespace Intex2Backend.Controllers
             return orders.ToArray();
         }
         // Search Orders
+        [Authorize]
         [HttpGet("SearchOrders")]
         public IEnumerable<Order> FilterOrders(string searchTerm)
         {
@@ -417,6 +438,7 @@ namespace Intex2Backend.Controllers
             return productData;
         }
         // Edit a product
+        [Authorize]
         [HttpPut("EditProduct")]
         public IActionResult EditProduct(int id, Product product)
         {
@@ -456,6 +478,7 @@ namespace Intex2Backend.Controllers
             return NoContent();
         }
         // Create Product
+        [Authorize]
         [HttpPost("CreateProduct")]
         public IActionResult CreateProduct(Product product)
         {
@@ -544,6 +567,7 @@ namespace Intex2Backend.Controllers
             return Ok(recommendations);
         }
 
+        [Authorize]
         [HttpGet("GetOneProductCollab")]
         public IActionResult GetProductCollab(int id)
         {
@@ -554,7 +578,7 @@ namespace Intex2Backend.Controllers
             }
             return Ok(recommendations);
         }
-
+        [Authorize]
         [HttpGet("GetOneUserCollab")]
         public IActionResult GetUserCollab(short userId)
         {
@@ -569,6 +593,7 @@ namespace Intex2Backend.Controllers
         //
         //Onnx File Implementation
         //
+        [Authorize]
         [HttpPost("detect-fraud")]
         public IActionResult DetectFraud([FromBody] FraudDetectionInput input)
         {
