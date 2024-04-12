@@ -15,7 +15,19 @@ public partial class IntexDatabaseContext : DbContext
     {
     }
 
-    public virtual DbSet<ContentFilteringRecommendation> ContentFilteringRecommendations { get; set; }
+    public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+
+    public virtual DbSet<AspNetRoleClaim> AspNetRoleClaims { get; set; }
+
+    public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+
+    public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+
+    public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+
+    public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; }
+
+    public virtual DbSet<ContentFiltering> ContentFilterings { get; set; }
 
     public virtual DbSet<Customer> Customers { get; set; }
 
@@ -25,9 +37,9 @@ public partial class IntexDatabaseContext : DbContext
 
     public virtual DbSet<Product> Products { get; set; }
 
-    public virtual DbSet<ProductRecommendation> ProductRecommendations { get; set; }
+    public virtual DbSet<ProductCollab> ProductCollabs { get; set; }
 
-    public virtual DbSet<UserRecommendation> UserRecommendations { get; set; }
+    public virtual DbSet<UserCollab> UserCollabs { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -35,45 +47,100 @@ public partial class IntexDatabaseContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<ContentFilteringRecommendation>(entity =>
+        modelBuilder.Entity<AspNetRole>(entity =>
+        {
+            entity.HasIndex(e => e.NormalizedName, "RoleNameIndex")
+                .IsUnique()
+                .HasFilter("([NormalizedName] IS NOT NULL)");
+
+            entity.Property(e => e.Name).HasMaxLength(256);
+            entity.Property(e => e.NormalizedName).HasMaxLength(256);
+        });
+
+        modelBuilder.Entity<AspNetRoleClaim>(entity =>
+        {
+            entity.HasIndex(e => e.RoleId, "IX_AspNetRoleClaims_RoleId");
+
+            entity.HasOne(d => d.Role).WithMany(p => p.AspNetRoleClaims).HasForeignKey(d => d.RoleId);
+        });
+
+        modelBuilder.Entity<AspNetUser>(entity =>
+        {
+            entity.HasIndex(e => e.NormalizedEmail, "EmailIndex");
+
+            entity.HasIndex(e => e.NormalizedUserName, "UserNameIndex")
+                .IsUnique()
+                .HasFilter("([NormalizedUserName] IS NOT NULL)");
+
+            entity.Property(e => e.Email).HasMaxLength(256);
+            entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
+            entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
+            entity.Property(e => e.UserName).HasMaxLength(256);
+
+            entity.HasMany(d => d.Roles).WithMany(p => p.Users)
+                .UsingEntity<Dictionary<string, object>>(
+                    "AspNetUserRole",
+                    r => r.HasOne<AspNetRole>().WithMany().HasForeignKey("RoleId"),
+                    l => l.HasOne<AspNetUser>().WithMany().HasForeignKey("UserId"),
+                    j =>
+                    {
+                        j.HasKey("UserId", "RoleId");
+                        j.ToTable("AspNetUserRoles");
+                        j.HasIndex(new[] { "RoleId" }, "IX_AspNetUserRoles_RoleId");
+                    });
+        });
+
+        modelBuilder.Entity<AspNetUserClaim>(entity =>
+        {
+            entity.HasIndex(e => e.UserId, "IX_AspNetUserClaims_UserId");
+
+            entity.HasOne(d => d.User).WithMany(p => p.AspNetUserClaims).HasForeignKey(d => d.UserId);
+        });
+
+        modelBuilder.Entity<AspNetUserLogin>(entity =>
+        {
+            entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
+
+            entity.HasIndex(e => e.UserId, "IX_AspNetUserLogins_UserId");
+
+            entity.HasOne(d => d.User).WithMany(p => p.AspNetUserLogins).HasForeignKey(d => d.UserId);
+        });
+
+        modelBuilder.Entity<AspNetUserToken>(entity =>
+        {
+            entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
+
+            entity.HasOne(d => d.User).WithMany(p => p.AspNetUserTokens).HasForeignKey(d => d.UserId);
+        });
+
+        modelBuilder.Entity<ContentFiltering>(entity =>
         {
             entity.HasKey(e => e.Index);
 
-            entity.ToTable("ContentFilteringRecommendation");
+            entity.ToTable("ContentFiltering");
 
             entity.Property(e => e.Index).HasColumnName("index");
-            entity.Property(e => e.IfYouLiked)
-                .HasMaxLength(100)
-                .HasColumnName("If_you_liked");
-            entity.Property(e => e.Recommendation1)
-                .HasMaxLength(100)
-                .HasColumnName("Recommendation_1");
-            entity.Property(e => e.Recommendation2)
-                .HasMaxLength(50)
-                .HasColumnName("Recommendation_2");
-            entity.Property(e => e.Recommendation3)
-                .HasMaxLength(100)
-                .HasColumnName("Recommendation_3");
-            entity.Property(e => e.Recommendation4)
-                .HasMaxLength(50)
-                .HasColumnName("Recommendation_4");
-            entity.Property(e => e.Recommendation5)
-                .HasMaxLength(50)
-                .HasColumnName("Recommendation_5");
+            entity.Property(e => e.IfYouLiked).HasColumnName("If_you_liked");
+            entity.Property(e => e.Recommendation1).HasColumnName("Recommendation_1");
+            entity.Property(e => e.Recommendation2).HasColumnName("Recommendation_2");
+            entity.Property(e => e.Recommendation3).HasColumnName("Recommendation_3");
+            entity.Property(e => e.Recommendation4).HasColumnName("Recommendation_4");
+            entity.Property(e => e.Recommendation5).HasColumnName("Recommendation_5");
         });
 
         modelBuilder.Entity<Customer>(entity =>
         {
             entity.ToTable("Customer");
 
-            entity.Property(e => e.CustomerId)
-                .ValueGeneratedNever()
-                .HasColumnName("customer_ID");
+            entity.Property(e => e.CustomerId).HasColumnName("customer_ID");
             entity.Property(e => e.Age).HasColumnName("age");
             entity.Property(e => e.BirthDate).HasColumnName("birth_date");
             entity.Property(e => e.CountryOfResidence)
                 .HasMaxLength(50)
                 .HasColumnName("country_of_residence");
+            entity.Property(e => e.Email)
+                .HasMaxLength(100)
+                .HasColumnName("email");
             entity.Property(e => e.FirstName)
                 .HasMaxLength(50)
                 .HasColumnName("first_name");
@@ -103,7 +170,9 @@ public partial class IntexDatabaseContext : DbContext
 
             entity.ToTable("Order");
 
-            entity.Property(e => e.TransactionId).HasColumnName("transaction_ID");
+            entity.Property(e => e.TransactionId)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("transaction_ID");
             entity.Property(e => e.CustomerId).HasColumnName("customer_ID");
             entity.Property(e => e.Amount).HasColumnName("amount");
             entity.Property(e => e.Bank)
@@ -136,7 +205,9 @@ public partial class IntexDatabaseContext : DbContext
         {
             entity.ToTable("Product");
 
-            entity.Property(e => e.ProductId).HasColumnName("product_ID");
+            entity.Property(e => e.ProductId)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("product_ID");
             entity.Property(e => e.Category)
                 .HasMaxLength(50)
                 .HasColumnName("category");
@@ -163,58 +234,36 @@ public partial class IntexDatabaseContext : DbContext
             entity.Property(e => e.Year).HasColumnName("year");
         });
 
-        modelBuilder.Entity<ProductRecommendation>(entity =>
+        modelBuilder.Entity<ProductCollab>(entity =>
         {
-            entity.HasKey(e => e.Index);
+            entity.HasKey(e => e.ProductId);
 
-            entity.ToTable("ProductRecommendation");
+            entity.ToTable("ProductCollab");
 
-            entity.Property(e => e.Index).HasColumnName("index");
-            entity.Property(e => e.IfYouLiked)
-                .HasMaxLength(100)
-                .HasColumnName("If_you_liked");
-            entity.Property(e => e.Recommendation1)
-                .HasMaxLength(50)
-                .HasColumnName("Recommendation_1");
-            entity.Property(e => e.Recommendation2)
-                .HasMaxLength(50)
-                .HasColumnName("Recommendation_2");
-            entity.Property(e => e.Recommendation3)
-                .HasMaxLength(50)
-                .HasColumnName("Recommendation_3");
-            entity.Property(e => e.Recommendation4)
-                .HasMaxLength(50)
-                .HasColumnName("Recommendation_4");
-            entity.Property(e => e.Recommendation5)
-                .HasMaxLength(50)
-                .HasColumnName("Recommendation_5");
+            entity.Property(e => e.ProductId).HasColumnName("Product_ID");
+            entity.Property(e => e.IfYouLiked).HasColumnName("If_you_liked");
+            entity.Property(e => e.Recommendation1).HasColumnName("Recommendation_1");
+            entity.Property(e => e.Recommendation2).HasColumnName("Recommendation_2");
+            entity.Property(e => e.Recommendation3).HasColumnName("Recommendation_3");
+            entity.Property(e => e.Recommendation4).HasColumnName("Recommendation_4");
+            entity.Property(e => e.Recommendation5).HasColumnName("Recommendation_5");
         });
 
-        modelBuilder.Entity<UserRecommendation>(entity =>
+        modelBuilder.Entity<UserCollab>(entity =>
         {
             entity.HasKey(e => e.UserId);
+
+            entity.ToTable("UserCollab");
 
             entity.Property(e => e.UserId)
                 .ValueGeneratedNever()
                 .HasColumnName("User_ID");
-            entity.Property(e => e.Recommendation1)
-                .HasMaxLength(50)
-                .HasColumnName("Recommendation_1");
-            entity.Property(e => e.Recommendation2)
-                .HasMaxLength(50)
-                .HasColumnName("Recommendation_2");
-            entity.Property(e => e.Recommendation3)
-                .HasMaxLength(50)
-                .HasColumnName("Recommendation_3");
-            entity.Property(e => e.Recommendation4)
-                .HasMaxLength(50)
-                .HasColumnName("Recommendation_4");
-            entity.Property(e => e.Recommendation5)
-                .HasMaxLength(50)
-                .HasColumnName("Recommendation_5");
-            entity.Property(e => e.TopRatedProduct)
-                .HasMaxLength(100)
-                .HasColumnName("Top_Rated_Product");
+            entity.Property(e => e.Recommendation1).HasColumnName("Recommendation_1");
+            entity.Property(e => e.Recommendation2).HasColumnName("Recommendation_2");
+            entity.Property(e => e.Recommendation3).HasColumnName("Recommendation_3");
+            entity.Property(e => e.Recommendation4).HasColumnName("Recommendation_4");
+            entity.Property(e => e.Recommendation5).HasColumnName("Recommendation_5");
+            entity.Property(e => e.TopRatedProduct).HasColumnName("Top_Rated_Product");
         });
 
         OnModelCreatingPartial(modelBuilder);

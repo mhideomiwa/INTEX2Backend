@@ -527,5 +527,42 @@ namespace Intex2Backend.Controllers
 
             return products.ToArray();
         }
+
+        //
+        // Get Machine Learning Info
+        //
+        // Returns content filtering recommendations for a specific ID
+        [HttpGet("GetOneContentFiltering")]
+        public IActionResult GetContentFilterings(int id)
+        {
+            var recommendations = _repo.ContentFilterings.FirstOrDefault(r => r.IfYouLiked == id);
+            if (recommendations == null)
+            {
+                return NotFound();
+            }
+            return Ok(recommendations);
+        }
+
+        [HttpGet("GetOneProductCollab")]
+        public IActionResult GetProductCollab(int id)
+        {
+            var recommendations = _repo.ProductCollabs.FirstOrDefault(r => r.IfYouLiked == id);
+            if (recommendations == null)
+            {
+                return NotFound();
+            }
+            return Ok(recommendations);
+        }
+
+        [HttpGet("GetOneUserCollab")]
+        public IActionResult GetUserCollab(short userId)
+        {
+            var recommendations = _repo.UserCollabs.FirstOrDefault(r => r.UserId == userId);
+            if (recommendations == null)
+            {
+                return NotFound();
+            }
+            return Ok(recommendations);
+        }
     }
 }

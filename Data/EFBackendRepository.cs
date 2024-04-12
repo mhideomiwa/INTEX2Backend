@@ -38,6 +38,24 @@ namespace Intex2Backend.Data
             set => throw new NotImplementedException(); // Implement setter if needed
         }
 
+        public IEnumerable<ContentFiltering> ContentFilterings
+        {
+            get => _context.ContentFilterings;
+            set => throw new NotImplementedException();
+        }
+
+        public IEnumerable<ProductCollab> ProductCollabs
+        {
+            get => _context.ProductCollabs;
+            set => throw new NotImplementedException();
+        }
+
+        public IEnumerable<UserCollab> UserCollabs
+        {
+            get => _context.UserCollabs; 
+            set => throw new NotImplementedException();
+        }
+
         public void UpdateProduct(Product product)
         {
             _context.Entry(product).State = EntityState.Modified;
