@@ -7,6 +7,7 @@ using Microsoft.Extensions.Azure;
 using Microsoft.ML.OnnxRuntime;
 using System;
 namespace Intex2Backend.Controllers
+// Please just work
 
 {
     [Route("api/[controller]")]
