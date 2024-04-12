@@ -575,7 +575,7 @@ namespace Intex2Backend.Controllers
     public IActionResult DetectFraud([FromBody] FraudDetectionInput input)
     {
         // Load the ONNX model (you can do this once and keep it in memory)
-        var modelPath = Path.Combine(Directory.GetCurrentDirectory(), "Onnx", "decision_tree_model.onnx");
+        var modelPath = Path.Combine(Directory.GetCurrentDirectory(), "Onnx", "extra_trees.onnx");
         var session = new InferenceSession(modelPath);
 
         // Get the input name from the model's metadata
